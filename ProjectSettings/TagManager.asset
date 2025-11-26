@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Anchor
   - Exit
+  - TrackingObject
+  - Actors
+  - Wall
   layers:
   - Default
   - TransparentFX

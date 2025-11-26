@@ -4,16 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactors.Casters;
 
-public enum Axis
-{
-    X, Y, Z
-}
 
 [Serializable]
 public class ShipData
 {
     public Vector3Int origin;
-    public Axis direction;
+    public string direction;
     public int length;
 }
 
@@ -174,15 +170,15 @@ public class LevelLoader : MonoBehaviour
             Vector3 direction = Vector3.zero;
             switch (shipData.direction)
             {
-                case Axis.X:
+                case "X":
                     direction.x = 1f;
                     rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
                     break;
-                case Axis.Y:
+                case "Y":
                     direction.y = 1f;
                     rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
                     break;
-                case Axis.Z:
+                case "Z":
                     direction.z = 1f;
                     rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY;
                     break;
@@ -213,7 +209,7 @@ public class LevelLoader : MonoBehaviour
 
     void OnRenderObject()
     {
-        if (data == null) return;
+        if (data == null || cubeVertices == null) return;
 
         GL.PushMatrix();
         GL.MultMatrix(transform.localToWorldMatrix);
@@ -221,34 +217,64 @@ public class LevelLoader : MonoBehaviour
         lineMaterial.SetPass(0);
 
         GL.Begin(GL.LINES);
-        GL.Color(Color.white);
 
-        int countX = data.boardSize.x * 2;
-        int countY = data.boardSize.y * 2;
-        int countZ = data.boardSize.z * 2;
+        // 전체 보드를 감싸는 박스의 "반" 크기 (unitSize 기준)
+        // 예: boardSize.x = 3이면 X축 전체 길이 = 3 * 2 * unitSize
+        //     그 반 = 3 * unitSize
+        float halfX = unitSize * data.boardSize.x;
+        float halfY = unitSize * data.boardSize.y;
+        float halfZ = unitSize * data.boardSize.z;
 
-        float startX = -(countX - 1) * 0.5f * unitSize;
-        float startY = -(countY - 1) * 0.5f * unitSize;
-        float startZ = -(countZ - 1) * 0.5f * unitSize;
+        // 8등분된 각 작은 박스의 중심은
+        // -half/2, +half/2 위치
+        // => ±(half / 2) = ±(unitSize * boardSize / 2)
+        float centerOffsetX = halfX * 0.5f;
+        float centerOffsetY = halfY * 0.5f;
+        float centerOffsetZ = halfZ * 0.5f;
 
-        for (int ix = 0; ix < countX; ix++)
+        // cubeVertices는 현재 unitSize 기준 큐브(한 변 unitSize)라서
+        // boardSize.x, y, z 배수로 늘려서
+        // 큰 박스를 2x2x2로 나눈 크기에 맞춰줌
+        //  (증명: scaleX = boardSize.x 하면 정확히 8등분된 크기가 됨)
+
+        for (int ix = 0; ix < 2; ix++)
         {
-            float x = startX + ix * unitSize;
-            for (int iy = 0; iy < countY; iy++)
-            {
-                float y = startY + iy * unitSize;
-                for (int iz = 0; iz < countZ; iz++)
-                {
-                    float z = startZ + iz * unitSize;
+            float cx = (ix == 0 ? -centerOffsetX : centerOffsetX);
 
-                    Vector3 center = new Vector3(x, y, z);
+            for (int iy = 0; iy < 2; iy++)
+            {
+                float cy = (iy == 0 ? -centerOffsetY : centerOffsetY);
+
+                for (int iz = 0; iz < 2; iz++)
+                {
+                    float cz = (iz == 0 ? -centerOffsetZ : centerOffsetZ);
+
+                    Vector3 center = new Vector3(cx, cy, cz);
+
                     for (int e = 0; e < cubeEdges.GetLength(0); e++)
                     {
                         int i0 = cubeEdges[e, 0];
                         int i1 = cubeEdges[e, 1];
 
-                        Vector3 v0 = center + cubeVertices[i0];
-                        Vector3 v1 = center + cubeVertices[i1];
+                        // 원래 unitSize 기준 (-h~+h)인 버텍스를
+                        // boardSize 배 만큼 스케일해서
+                        // 전체 박스를 2x2x2로 나눈 큐브로 맞춰줌
+                        Vector3 base0 = cubeVertices[i0];
+                        Vector3 base1 = cubeVertices[i1];
+
+                        Vector3 v0Local = new Vector3(
+                            base0.x * data.boardSize.x,
+                            base0.y * data.boardSize.y,
+                            base0.z * data.boardSize.z
+                        );
+                        Vector3 v1Local = new Vector3(
+                            base1.x * data.boardSize.x,
+                            base1.y * data.boardSize.y,
+                            base1.z * data.boardSize.z
+                        );
+
+                        Vector3 v0 = center + v0Local;
+                        Vector3 v1 = center + v1Local;
 
                         GL.Vertex(v0);
                         GL.Vertex(v1);
