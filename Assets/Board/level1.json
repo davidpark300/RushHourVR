@@ -1,0 +1,29 @@
+{
+  "boardSize": { "x": 3, "y": 3, "z": 3 },
+
+  "exit": { "x": 3, "y": 0, "z": 0 },
+
+  "hero": {
+    "origin": { "x": -3, "y": 0, "z": 0 },
+    "direction": "X",
+    "length": 2
+  },
+
+  "ships": [
+    {
+      "origin": { "x": 0, "y": 0, "z": 0 },
+      "direction": "Y",
+      "length": 3
+    },
+    {
+      "origin": { "x": 3, "y": 1, "z": 0 },
+      "direction": "X",
+      "length": 2
+    },
+    {
+      "origin": { "x": -2, "y": -2, "z": 0 },
+      "direction": "Z",
+      "length": 3
+    }
+  ]
+}
