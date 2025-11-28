@@ -36,7 +36,7 @@ public class LControllerPrimaryButton : MonoBehaviour
         // 버튼이 실제로 눌렸는지 확인
         if (context.performed)
         {
-            Debug.Log("Left Controller Primary Button (B/Y) Pressed!");
+            Debug.Log("Left Controller Primary Button 눌림");
         }
         isActivated = !isActivated;
         myHUD.SetActive(isActivated);

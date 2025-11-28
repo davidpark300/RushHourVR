@@ -57,7 +57,7 @@ public class RControllerSecondButton : MonoBehaviour
         // 버튼이 실제로 눌렸는지 확인
         if (context.performed)
         {
-            Debug.Log("Right Controller Secondary Button (B/Y) Pressed!");
+            Debug.Log("Right Controller Secondary Button 눌림");
         }
 
         

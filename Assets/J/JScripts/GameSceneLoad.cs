@@ -5,19 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneLoad : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void planetGrabbed(string loadSceneName)
     {
         Debug.Log("진입하는 행성 : " + loadSceneName);

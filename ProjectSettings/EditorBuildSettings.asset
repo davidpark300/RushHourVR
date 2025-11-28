@@ -6,29 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 55daccc09a3b69647bbab145b54a3ab3
-  - enabled: 1
     path: Assets/Scenes/StartScene.unity
     guid: 3a90919c162e4d6478ed8f4d7f4a60f1
   - enabled: 1
     path: Assets/Scenes/MercuryStageScene.unity
-    guid: 6850c05a117a6254dbdbb57fac73df74
+    guid: ee8259e555ac3204ea4bda401bb3566d
   - enabled: 1
     path: Assets/Scenes/VenusStageScene.unity
-    guid: 6a180eea796b9374882efb01aa091151
+    guid: 4dad781d04ce8ed4e9e27f574469b9b5
   - enabled: 1
     path: Assets/Scenes/EarthStageScene.unity
-    guid: ed496bb6b182b5446b9df8af9ca39b4e
+    guid: fd5df44ca192d234096e129141b07e6b
   - enabled: 1
     path: Assets/Scenes/MarsStageScene.unity
-    guid: b3226ebf8f061b045814f7a2d50d8592
+    guid: b12b4f805bbc4b44f80b9711c5a6a49f
   - enabled: 1
     path: Assets/Scenes/JupiterStageScene.unity
-    guid: fd36b17506f4cef4fa98420a482afc65
+    guid: c298ebf021328c04bbb532af3913d132
   - enabled: 1
     path: Assets/Scenes/SaturnStageScene.unity
-    guid: 01bc24d1b99cfe947b2f951da123e6ef
+    guid: 09802299cf8ca724690b48709cee26c0
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
