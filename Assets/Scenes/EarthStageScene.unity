@@ -512,6 +512,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1680501587, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_BackGroundColor.a
       value: 1
@@ -837,9 +841,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b23377f70bab4a43bde2cc22b1d16fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFile: {fileID: 4900000, guid: 110fae75ba33866479f324f5c9b030bf, type: 3}
+  jsonFile: {fileID: 4900000, guid: c52cc77ad7829d240a6b7c1274a0df36, type: 3}
   unitSize: 3
   lineMaterial: {fileID: 2100000, guid: 111360ca960b45249ae7e54b0af98b76, type: 2}
+  explosionParticle: {fileID: 7546326681692588983, guid: c08e6b7e832349440b442b10f0b23171, type: 3}
+  clearSpeed: 3
+  mainCamera: {fileID: 1809180620}
+  chaseTime: 3
+  endTime: 4
   leftNFI: {fileID: 1629793884}
   rightNFI: {fileID: 515781891}
   rayLength: 1000
@@ -1462,6 +1471,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &1809180620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1767192433, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 441087506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2092139007
 GameObject:
   m_ObjectHideFlags: 0
